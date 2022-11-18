@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mega Utsav Festival</title>
+    <style>
+        *,
+        *:before,
+        *:after {
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Nunito', sans-serif;
+            color: #384047;
+            background-position: 0px 0px;
+            background-repeat: repeat;
+            animation: animatedBackground 40s linear infinite;
+            opacity: 0.9;
+        }
+
+        @keyframes animatedBackground {
+            from {
+                background-position: 0 0;
+            }
+
+            to {
+                background-position: 100% 0;
+            }
+        }
+
+        form {
+            max-width: 300px;
+            margin: 10px auto;
+            padding: 10px 20px;
+            background: #f4f7f8;
+            border-radius: 8px;
+        }
+
+        a {
+            color: #fff;
+            font-weight: 400;
+            text-decoration: none;
+            font-size: 26px;
+        }
+
+        h1 {
+            margin: 0 0 30px 0;
+            text-align: center;
+        }
+
+        input[type="text"],
+        input[type="password"],
+        input[type="date"],
+        input[type="datetime"],
+        input[type="email"],
+        input[type="number"],
+        input[type="search"],
+        input[type="tel"],
+        input[type="time"],
+        input[type="url"],
+        textarea,
+        select {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            font-size: 16px;
+            height: auto;
+            margin: 0;
+            outline: 0;
+            padding: 15px;
+            width: 100%;
+            background-color: #e8eeef;
+            color: #8a97a0;
+            box-shadow: 0 1px 0 rgba(0, 0, 0, 0.03) inset;
+            margin-bottom: 30px;
+        }
+
+        input[type="radio"],
+        input[type="checkbox"] {
+            margin: 0 4px 8px 0;
+        }
+
+        select {
+            padding: 6px;
+            height: 32px;
+            border-radius: 2px;
+        }
+
+        button {
+            padding: 19px 39px 18px 39px;
+            color: #FFF;
+            background-color: #4bc970;
+            font-size: 18px;
+            text-align: center;
+            font-style: normal;
+            border-radius: 5px;
+            width: 100%;
+            border: 1px solid #3ac162;
+            border-width: 1px 1px 3px;
+            box-shadow: 0 -1px 0 rgba(255, 255, 255, 0.1) inset;
+            margin-bottom: 10px;
+        }
+
+        fieldset {
+            margin-bottom: 30px;
+            border: none;
+        }
+
+        legend {
+            font-size: 1.4em;
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        label.light {
+            font-weight: 300;
+            display: inline;
+        }
+
+        .number {
+            background-color: #5fcf80;
+            color: #fff;
+            height: 30px;
+            width: 30px;
+            display: inline-block;
+            font-size: 0.8em;
+            margin-right: 4px;
+            line-height: 30px;
+            text-align: center;
+            text-shadow: 0 1px 0 rgba(255, 255, 255, 0.2);
+            border-radius: 100%;
+        }
+
+        @media screen and (min-width: 480px) {
+            form {
+                max-width: 480px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    
+
+
+    <form  id="frmContact" method="post">
+
+        <h1>Mega Utsav Festival</h1>
+
+        <fieldset>
+
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="user_name">
+
+            <label for="universityname">School/Collage:</label>
+            <input type="text" id="college_name" name="user_email">
+
+            <label for="cityname">City Name:</label>
+            <input type="text" id="city_name" name="user_email">
+
+            <label for="mail">Email:</label>
+            <input type="email" id="email" name="user_email">
+
+            <label for="contactnumber">Contact No:</label>
+            <input type="text" id="contactno" name="user_number">
+
+        </fieldset>
+
+
+        <button type="submit" name="submit">Submit</button>
+        <br/>
+        <button>View Data</button>
+
+    </form>
+
+</body>
+
+</html>
+
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-app.js";
+    import { getDatabase, ref, set, get, child } from "https://www.gstatic.com/firebasejs/9.6.11/firebase-database.js";
+
+    // Paste the code from Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyDKkcp-UMlKNM5tqO3WK-7t_gdMFFpwXRo",
+        authDomain: "mega-utsav-festival.firebaseapp.com",
+        projectId: "mega-utsav-festival",
+        storageBucket: "mega-utsav-festival.appspot.com",
+        messagingSenderId: "82901645271",
+        appId: "1:82901645271:web:b030952445914b018dfd92"
+    };
+
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+
+    // Get a reference to the database service
+    const db = getDatabase(app);
+
+    document.getElementById('frmContact').addEventListener('submit', function (e) {
+        e.preventDefault();
+        set(ref(db, 'users/' + Math.random().toString(36).slice(2, 7)), {
+            name: document.getElementById('name').value,
+            college: document.getElementById('college_name').value,
+            city: document.getElementById('city_name').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('contactno').value
+        });
+
+        console.log('success')
+        document.getElementById('frmContact').reset();
+    });
+
+    const dbRef = ref(getDatabase(app));
+get(child(dbRef, 'users/')).then((snapshot) => {
+    if (snapshot.exists()) {
+        Object.keys(snapshot.val()).forEach((key) => {
+            console.log(`Name: ${snapshot.val()[key].name}`);
+            console.log(`Email: ${snapshot.val()[key].email}`);
+            console.log(`Subject: ${snapshot.val()[key].subject}`);
+            console.log(`Message: ${snapshot.val()[key].message}`);
+        });
+    } else {
+        console.log("No data available");
+    }
+    }).catch((error) => {
+        console.error(error);
+});
+</script>
+
+</body>
+
+</html>
+<!-- 
+
+<script type="module">
+    // Import the functions you need from the SDKs you need
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.14.0/firebase-app.js";
+    // TODO: Add SDKs for Firebase products that you want to use
+    // https://firebase.google.com/docs/web/setup#available-libraries
+  
+    // Your web app's Firebase configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyDKkcp-UMlKNM5tqO3WK-7t_gdMFFpwXRo",
+      authDomain: "mega-utsav-festival.firebaseapp.com",
+      projectId: "mega-utsav-festival",
+      storageBucket: "mega-utsav-festival.appspot.com",
+      messagingSenderId: "82901645271",
+      appId: "1:82901645271:web:b030952445914b018dfd92"
+    };
+  
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+  </script> -->
